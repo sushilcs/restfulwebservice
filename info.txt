@@ -1,1 +1,58 @@
-info
+ihow are the request handled?
+ALl the request first handled by dispatcher servlet this is also called front controller pattern.
+ disptcher servlets are mapped to root url[/]
+ dipatcher servlet maps the request to services .
+ How does the dispatcher servlet maps the request ?
+
+ Spring boot configuration ("DispatcherServletAutoConfiguration")
+ How does HelloWorldBean get converted to json?
+ Ans :
+ @ResponseBoydy +JacksonHttpMesageConverters(default configuration)
+ @ResptController internally  uses @RespnseBody
+ @ResponseBody is responsible to converting the objec into json
+ The default formt
+Who is configuring error mapping?
+AutoConfiguration(ErrorMvcAutoConfiguration--search this class in IDE)
+Spring-boot-starter-web dependency does magic of all the autoconfiguration.
+
+
+-------------------------------------------------------------------------------------------
+What are path parameters?
+Path parameters are the part of uri which is a variable that changes to get specific info for specific
+resource
+
+Path Parameter --/user/{id}/todos/{id}
+for a specific user we can set those id variable
+user/1/todos/202
+
+How to access the value of pathVariable
+
+ans -- by using @PathVariable
+
+-----------------------------------------------------------------------------------------------------------
+Respnse Status of rest API
+
+Importent Respsonse statuses
+500 ---Server exception
+404 ---Resource is not found
+401 ---Unauthorized(when Authorization fails)
+400 ---Bad Request(Validate error)
+204 ---No content
+201 ---Post request (creating user or creating new entry for resource --  (201 is created resource)
+200 ---Success
+
+how to implement right response statuses for our api?
+
+We can use ResponseEntity Class to do that.
+
+for 201--ResponseEntity.created(it takes Location).build
+for create request we should send location of the resource created so that user get to know resource crated or not.
+
+You can use @ResponseStatus(code = HttpStatus.notfound/badrequest...)at the top
+of your Exception classes to return code with httpStatus code with exception log.
+
+-------------------------------------------------------------------------------
+
+Generic Exception handling for all the resources (get post delete)
+
+
