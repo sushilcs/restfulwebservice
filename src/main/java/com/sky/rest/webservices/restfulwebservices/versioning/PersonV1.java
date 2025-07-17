@@ -1,10 +1,9 @@
 package com.sky.rest.webservices.restfulwebservices.versioning;
 
-public class Person {
+public class PersonV1 {
     private String name;
-    private int age;
 
-    public Person(String name) {
+    public PersonV1(String name) {
         this.name = name;
     }
 

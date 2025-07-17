@@ -1,22 +1,35 @@
 package com.sky.rest.webservices.restfulwebservices;
 
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.web.bind.annotation.*;
 
 import java.nio.file.Path;
+import java.util.Locale;
 
 @RestController
 public class HelloWorldController {
 
-    @GetMapping("/hello")
-    public HelloWorldBean helloWorld(){
-
-        return new HelloWorldBean("message");
+    private MessageSource messageSource;
+    public HelloWorldController(MessageSource messageSource){
+        this.messageSource = messageSource;
     }
-    @GetMapping(path="hello/pathVariable/{name}")
+    @GetMapping(path = "/hello")
+    public HelloWorldBean helloWorld(){
+       //return "Hello World";
+        return new HelloWorldBean("Good Morning");
+    }
+    @GetMapping(path="/hello/{name}")
     public String helloWorldPatVariable(@PathVariable String name){
-        return name+" "+"Kumar "+"Yadav";
+        return "Good Morning "+name;
+    }
+
+    @GetMapping(path = "/hello-internalized")
+    public HelloWorldBean helloWorldInternationalized(){
+        Locale locale = LocaleContextHolder.getLocale();
+        //return "Hello World";
+        String msg= messageSource.getMessage("good.morning.message",null,"Defaul Message",locale);
+        return new HelloWorldBean(msg);
     }
 }

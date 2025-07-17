@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 @Component
-public class UserDaoService {
+public class    UserDaoService {
     private static List<User> users = new ArrayList<>();
 
     static{
@@ -31,5 +31,10 @@ public class UserDaoService {
     public User findOne(int id){
         Predicate<User> predicate = user->user.getId().equals(id);
         return users.stream().filter(predicate).findFirst().orElse(null);
+    }
+    public void deleteById(int id){
+        Predicate<User> predicate = user->user.getId().equals(id);
+        users.removeIf(predicate);
+
     }
 }
